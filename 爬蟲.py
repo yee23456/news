@@ -16,12 +16,12 @@ import time
 
 #%%
 import jieba
-text=""
+text_test=""
 train = []
 PATH = "C:/Users/沈睿朋/Desktop/chromedriver_win32/chromedriver.exe"
 driver = webdriver.Chrome(PATH)
 
-driver.get("https://ctee.com.tw/category/news/policy")
+driver.get("https://finance.ettoday.net/news/2197285")
 
 
 #搜尋
@@ -32,22 +32,38 @@ driver.get("https://ctee.com.tw/category/news/policy")
 #     (By.CLASS_NAME, "")))
 
 #找標題
-title = driver.find_element_by_class_name("post-title")
-find_title = title.text
+# title = driver.find_element_by_class_name("post-title")
+# find_title = title.text
+
+
+
+#找網址
+# elems  = driver.find_element_by_css_selector(".nav_1.clearfix [href]")
+# links = [elem.get_attribute('href') for elem in elems]
+
+# class_title = driver.find_elements_by_class_name("nav_1")
+# for i in class_title:
+#     print(i.text)
+
 #文章點按進去
-link = driver.find_element_by_link_text(find_title)
-link.click()
+# link = driver.find_element_by_link_text(find_title)
+# link.click()
+
+
 #爬文
-inside_text = driver.find_elements_by_class_name("entry-content")
+inside_text = driver.find_elements_by_class_name("story")
 for words in inside_text:
-    text+=words.text
-print(text)
+    text_test+=words.text
+print(text_test)
+    
+    
+
 time.sleep(5)
 driver.quit()
 # link.click()
 # driver.find
 #%%
-print(type(text))
+
 
 #%%
 
