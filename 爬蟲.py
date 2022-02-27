@@ -21,7 +21,7 @@ train = []
 PATH = "C:/Users/沈睿朋/Desktop/chromedriver_win32/chromedriver.exe"
 driver = webdriver.Chrome(PATH)
 
-driver.get("https://finance.ettoday.net/news/2197285")
+driver.get("https://finance.ettoday.net/focus/775")
 
 
 #搜尋
@@ -29,7 +29,7 @@ driver.get("https://finance.ettoday.net/news/2197285")
 # search.send_keys("比特幣")
 # search.send_keys(Keys.RETURN)
 WebDriverWait(driver, 10).until(EC.presence_of_element_located(
-    (By.CLASS_NAME, "")))
+    (By.CLASS_NAME, "block_title")))
 
 #找標題
 # title = driver.find_element_by_class_name("post-title")
@@ -46,8 +46,8 @@ WebDriverWait(driver, 10).until(EC.presence_of_element_located(
 #     print(i.text)
 
 #文章點按進去
-# link = driver.find_element_by_link_text(find_title)
-# link.click()
+link = driver.find_element_by_link_text("SWIFT被踢還有西聯匯款！　俄羅斯留學生、異鄉人免驚")
+link.click()
 
 
 #爬文
