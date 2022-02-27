@@ -28,8 +28,8 @@ driver.get("https://finance.ettoday.net/news/2197285")
 # search = driver.find_element_by_name("query")
 # search.send_keys("比特幣")
 # search.send_keys(Keys.RETURN)
-# WebDriverWait(driver, 10).until(EC.presence_of_element_located(
-#     (By.CLASS_NAME, "")))
+WebDriverWait(driver, 10).until(EC.presence_of_element_located(
+    (By.CLASS_NAME, "")))
 
 #找標題
 # title = driver.find_element_by_class_name("post-title")
@@ -63,6 +63,10 @@ driver.quit()
 # link.click()
 # driver.find
 #%%
+
+class_title_text = []
+class_title = driver.find_elements_by_class_name("nav_1")
+
 
 
 #%%
