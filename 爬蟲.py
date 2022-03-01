@@ -38,23 +38,24 @@ WebDriverWait(driver, 10).until(EC.presence_of_element_located(
 
 
 #找網址
-# elems  = driver.find_element_by_css_selector(".nav_1.clearfix [href]")
-# links = [elem.get_attribute('href') for elem in elems]
+elems  = driver.find_element_by_css_selector(".piece.clearfix [href]")
+links = [elem.get_attribute('href') for elem in elems]
+print(links)
 
 # class_title = driver.find_elements_by_class_name("nav_1")
 # for i in class_title:
 #     print(i.text)
 
 #文章點按進去
-link = driver.find_element_by_link_text("SWIFT被踢還有西聯匯款！　俄羅斯留學生、異鄉人免驚")
-link.click()
+# link = driver.find_element_by_link_text("SWIFT被踢還有西聯匯款！　俄羅斯留學生、異鄉人免驚")
+# link.click()
 
 
 #爬文
-inside_text = driver.find_elements_by_class_name("story")
-for words in inside_text:
-    text_test+=words.text
-print(text_test)
+# inside_text = driver.find_elements_by_class_name("story")
+# for words in inside_text:
+#     text_test+=words.text
+# print(text_test)
     
     
 
