@@ -24,23 +24,25 @@ for h in range(9):#0 3 4 5 7 8
         find_subtitle_text = []
         link_classification = driver.find_element_by_link_text(class_title_text[h])
         link_classification.click() #點進小標題裡面
-        time.sleep(2)
+        time.sleep(3)
         path = f'C:/Users/沈睿朋/Desktop/比賽/output{class_title_text[h]}.txt'
         f = open(path, 'w' , encoding  = 'UTF-8')
     
     
         for j in range(1,3): #找前十篇文章
             text_test=""
-            time.sleep(2)
             link_subtitle =driver.find_element_by_xpath(f'//*[@id="finance"]/div[3]/div/div[7]/div/div/div[1]/div[1]/div[2]/a[{j}]')
             link_subtitle.click()
-            time.sleep(2)
+            time.sleep(3)
             
             
             # 爬內文
+            WebDriverWait(driver, 10).until(EC.presence_of_element_located(
+                    (By.CLASS_NAME, "story")))
             inside_text = driver.find_elements_by_class_name("story")
             for words in inside_text:
                 text_test+=words.text
+            time.sleep(3)
             
             f.writelines(f'{j}')
             f.writelines(f'{link_subtitle.get_attribute("href")}\n')
