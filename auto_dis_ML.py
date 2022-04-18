@@ -26,7 +26,7 @@ def input_file(name):
                 word.append(word_text)
                 word_text = ''
             
-            elif line[0][0:3] == ['看全文']:
+            elif line[0][0:3] == '看全文':
                 continue
             
             elif line[0][0:2] == '記者':
@@ -112,72 +112,4 @@ print ("logloss: %0.3f " % multiclass_logloss(yvalid, predictions))
 joblib.dump(clf,'clf.pkl')
 joblib.dump(ctv,'ctv.pkl')
 
-#%%
-#讀取時分小標
-import joblib
-import pandas as pd
-stop_word = ['h','▲','記者','▼','【','►',' ','《','[']
-path = "C:/Users/Paul/Documents/github/news/測試" #資料夾目錄
-files= os.listdir(path) #得到資料夾下的所有檔名稱
-word = []
-# name = []
-# word_num = []
-word_text = ''
-for file in files: #遍歷資料夾
-    if not os.path.isdir(file): #判斷是否是資料夾，不是資料夾才開啟
-        f = open(path+"/"+file,encoding=('utf-8')); #開啟檔案
-        iter_f = iter(f); #建立迭代器
-    for i in iter_f:
-        line = i.splitlines()
-        if line == ['']:
-            word.append(word_text)
-            word_text = ''
-            
-        elif line[0][0:3] == '看全文':
-            continue
-        
-        elif line[0][0:2] == '記者':
-            continue
-        
-        elif line[0][0] in stop_word:
-            continue
-        
-        word_text+=i.rstrip()
-
-    # a = len(word)
-    # word_num.append(a)
-    # name.append(file.replace('.txt',''))
-# print(word_num)
-# print(name)
-
-#%%
-clf2 = joblib.load('C:/Users/Paul/Documents/github/news/clf.pkl')
-ctv2 = joblib.load('C:/Users/Paul/Documents/github/news/ctv.pkl')
-df = pd.DataFrame(word,columns = ['file'])
-df['file_Participle'] = df['file'].apply(lambda i:jieba.cut(i) )
-df['file_Participle'] =[' '.join(i) for i in df['file_Participle']]
-df['test_dis'] = df['file_Participle'] .apply(lambda x : clf2.predict(ctv2.transform([x])))
-df['分類項目'] = df['test_dis'].apply(lambda x: '國內' if x == 0 else '國外')
-# df['小標'] = '0'
-# def name_dis(num,asd):
-#     df['小標'][0:num+1] = asd
-
-# for i in range(len(name)):
-#     name_dis(word_num[::-1][i],name[::-1][i])
-
-#%%
-#編寫時分小標存檔
-def dis(dis_name,sub):    
-    path = f'C:/Users/Paul/Documents/github/news/{dis_name}/2022_4_13.txt'
-    f = open(path, 'w',encoding=('UTF-8'))
-    for i in range(len(df)):
-        if df.分類項目.iloc[i] == sub:
-            f.writelines(df.file.iloc[i])
-            f.writelines('\n\n')
-        else:
-            pass
-    f.close()
-    
-dis('domestic','國內')
-dis('foreign','國外')
 
